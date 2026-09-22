@@ -1,0 +1,200 @@
+{
+  "project_name": "SC2 Mod Command Center",
+  "theme": "Dark Survivalcraft 2 Tactical Voxel Modding Suite",
+  "persona_archetype": "THE PERFORMANCE PRO x SWISS BRUTALIST (Tactical Voxel Game Command)",
+  "instructions_to_main_agent": [
+    "Use Javascript (.js / .jsx) for all components and files as specified in the codebase context.",
+    "First screen on launch MUST be TAB 1 (Project Tracker). Set default active tab to 'tracker'.",
+    "Maintain a persistent dark tactical SC2 game aesthetic throughout. Dark slate/obsidian background (#0b0f17) with warm amber/gold (#f59e0b) primary accents and neon teal (#06b6d4) status highlights.",
+    "Provide high density UI controls, heavy-weight athletic/tech display typography for section titles, and crisp JetBrains/Source Code Pro monospace font for XML code, logs, and technical telemetry.",
+    "Implement full mobile-first design: Sticky bottom tab bar on mobile viewport (<768px) and top/sidebar docked navigation on desktop viewports.",
+    "All interactive elements (buttons, inputs, tabs, modal triggers, list items, copy buttons, export triggers) MUST include concise role-based data-testid attributes (e.g., data-testid='add-project-button', data-testid='tab-model-prep', data-testid='log-paste-textarea').",
+    "Never use generic centered layouts or plain transparent dropdown/modal overlays. Ensure modals and menus have full backdrop-blur-xl and explicit high contrast backgrounds with solid/glow borders.",
+    "Avoid default 'Inter' for headings; use high-character game-tech font styling or heavy tracking.",
+    "Integrate database persistent state handling (localStorage with API sync fallback) so project entries, log parses, and template field state persist between page refreshes.",
+    "For Tab 2 (Model Prep): Use Three.js / @react-three/fiber with OrbitControls, directional and ambient lights, dynamic grid helper, gizmo orientation, bounding box calculation, scaling to target meters, orientation rotation, mode toggle (Weapon pivot, Block grid snap, Item), HTML canvas PNG snapshot button, and Collada (.dae) ZIP generation.",
+    "For Tab 3 (Log Reader): Parse pasted Survivalcraft 2 Game.log text, extract ERROR and Exception patterns, collapse duplicate errors into counter badges, and provide human-friendly plain English diagnostic explanations alongside expandable stack traces.",
+    "For Tab 4 (Template Builder): Parse example SC2 entity XML (e.g., <Block Id='...' Name='...' Texture='...' />), auto-extract XML attributes/nodes into dynamic form fields, live-render the customized XML preview with line numbers and one-click copy/download."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms.",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text.",
+    "Always use modern button styles like pill-shaped, or sharp tactical button with interaction animations & color relevant to the app style.",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 etc for icons. Use Lucide React or Phosphor Icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Prioritize using pre-existing components from src/components/ui when applicable.",
+    "Use sonner for toasts located in src/components/ui/sonner.js."
+  ],
+  "colors": {
+    "color_archetype": "Architectural Voxel Void & Tactical Amber Accent",
+    "palette": {
+      "background_main": "#0B0F17",
+      "background_card": "#121824",
+      "background_card_hover": "#1A2333",
+      "background_surface_elevated": "#1E2738",
+      "border_default": "#2A364F",
+      "border_accent": "#F59E0B",
+      "border_subtle": "#1A2333",
+      "text_primary": "#F3F4F6",
+      "text_secondary": "#9CA3AF",
+      "text_muted": "#6B7280",
+      "brand_primary": "#F59E0B",
+      "brand_primary_hover": "#D97706",
+      "brand_secondary": "#06B6D4",
+      "brand_secondary_hover": "#0891B2",
+      "status_idea": "#A855F7",
+      "status_model_made": "#3B82F6",
+      "status_textured": "#EC4899",
+      "status_tested": "#F59E0B",
+      "status_done": "#10B981",
+      "badge_bg_dark": "#0F172A",
+      "log_error_bg": "#2A1215",
+      "log_error_border": "#EF4444"
+    },
+    "rules": [
+      "Never use pure black (#000000); use deep blue-tinted dark void (#0B0F17).",
+      "Never leave dropdowns or dialog backdrops completely transparent; always pair backdrop-blur-md with bg-[#121824]/90 and border-[#2A364F].",
+      "Hover states MUST explicitly declare both background and text color to prevent contrast drop."
+    ]
+  },
+  "typography": {
+    "heading_font": "Rajdhani, 'Barlow Condensed', sans-serif",
+    "body_font": "Manrope, 'Segoe UI', sans-serif",
+    "code_font": "'JetBrains Mono', 'Fira Code', monospace",
+    "hierarchy": {
+      "h1_hero": "text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-100 uppercase",
+      "h2_section": "text-xl sm:text-2xl font-bold tracking-wide text-slate-200 uppercase",
+      "h3_sub": "text-lg font-semibold tracking-wide text-amber-400",
+      "body": "text-sm sm:text-base font-normal text-slate-300 leading-relaxed",
+      "caption": "text-xs font-medium tracking-widest text-slate-400 uppercase",
+      "code_block": "font-mono text-xs sm:text-sm text-cyan-300 bg-[#080B11] p-4 rounded-lg border border-[#1E2738]"
+    }
+  },
+  "layout_and_navigation": {
+    "structure": "Single Page App with 4 primary tab views + Sticky Top Header & Mobile Bottom Dock",
+    "tabs": [
+      {
+        "id": "tracker",
+        "label": "Project Tracker",
+        "icon": "FolderKanban",
+        "description": "Database-backed registry for mod entities, status, notes, and asset progress"
+      },
+      {
+        "id": "model-prep",
+        "label": "Model Prep",
+        "icon": "Box",
+        "description": "Interactive 3D viewport, scaling, Z-axis alignment, pivot snapping, icon capture & ZIP export"
+      },
+      {
+        "id": "log-reader",
+        "label": "Log Reader",
+        "icon": "Terminal",
+        "description": "Survivalcraft 2 Game.log exception parser, error grouping, and plain-English diagnostic fixes"
+      },
+      {
+        "id": "template-builder",
+        "label": "Template Builder",
+        "icon": "FileCode",
+        "description": "XML example attribute parser, dynamic form builder, and instant entity XML generator"
+      }
+    ],
+    "responsive_strategy": "Desktop: Top command bar + sub-navigation header tabs with active indicator glow. Mobile (<768px): Fixed bottom tactile navigation dock with large touch targets (min-h-[52px])."
+  },
+  "components_and_tabs_detail": {
+    "tab_1_project_tracker": {
+      "component_name": "ProjectTracker.js",
+      "features": [
+        "Filter bar by type (Creature, Weapon, Block, Item) and status (Idea, Model Made, Textured, In-Game Tested, Done).",
+        "Search bar for fast filtering by entity name or free-text notes.",
+        "Stat summary counter widgets at the top (Total Mods, Done %, In Testing).",
+        "Tactical grid card layout & switchable tabular list view.",
+        "Add Entry modal dialog & Edit/Delete triggers.",
+        "Database sync simulation with browser persistent Storage and REST API fallback."
+      ]
+    },
+    "tab_2_model_prep": {
+      "component_name": "ModelPrep.js",
+      "features": [
+        "Drag and drop / File select for 3D files (.glb, .obj). Includes sample default Survivalcraft block model preloaded.",
+        "Three.js 3D canvas viewport with camera reset, lighting controls, wireframe toggle, and unit grid.",
+        "Target length scale input in meters (auto computes scale multiplier).",
+        "Facing direction picker (+Z facing, auto 90/180/270 deg rotations).",
+        "Pivot alignment selector (Center, Weapon Grip End, Block Grid Snap 1x1x1, Item Free).",
+        "Icon Snapshot tool: renders camera viewport to transparent PNG for block/item icons.",
+        "Export engine: Generates Collada (.dae) format with UVs and packs Models/, Textures/..., Icons/ into downloadable .zip."
+      ]
+    },
+    "tab_3_log_reader": {
+      "component_name": "LogReader.js",
+      "features": [
+        "Large high-contrast log paste box with sample SC2 log load button.",
+        "Error parser engine that scans for Exception/ERROR lines and aggregates identical log occurrences with repeat count badge.",
+        "Plain-English diagnostic database matching common SC2 errors (e.g., 'NullReferenceException in SubsystemBlockBehaviors' -> 'Missing block behavior class registration in SC2 mod XML').",
+        "Filter toggle (All Errors, Unmatched Stack Traces, High Count).",
+        "Copy parsed summary report to clipboard."
+      ]
+    },
+    "tab_4_template_builder": {
+      "component_name": "TemplateBuilder.js",
+      "features": [
+        "Paste box for working SC2 entity XML example + sample presets dropdown (e.g., Block, Creature, Clothing, Weapon).",
+        "XML AST/Attribute parser that dynamically extracts all parameters into structured UI form fields (Inputs, Selects, Numbers, Booleans).",
+        "Live XML preview block with syntax color highlights.",
+        "Copy XML button and Download .xml file button."
+      ]
+    }
+  },
+  "motion_and_interactions": {
+    "library": "framer-motion & lucide-react",
+    "animations": {
+      "tab_switch": "Fade in with subtle Y slide (opacity 0 -> 1, y: 8px -> 0px, duration 0.2s)",
+      "card_hover": "Transform translateY(-2px), border color accent shift, ambient cyan glow shadow",
+      "button_press": "scale(0.97) spring effect",
+      "dialog_entrance": "Scale up from 0.95 with backdrop blur opacity transition"
+    }
+  },
+  "testing_and_data_ids": {
+    "mandatory_ids": [
+      "app-header",
+      "tab-tracker",
+      "tab-model-prep",
+      "tab-log-reader",
+      "tab-template-builder",
+      "add-project-button",
+      "project-search-input",
+      "project-type-filter",
+      "project-status-filter",
+      "project-card-item",
+      "model-upload-input",
+      "model-3d-canvas",
+      "model-scale-input",
+      "model-facing-select",
+      "model-mode-weapon",
+      "model-mode-block",
+      "model-mode-item",
+      "model-snapshot-button",
+      "model-export-zip-button",
+      "log-paste-textarea",
+      "log-parse-button",
+      "log-sample-button",
+      "log-error-card",
+      "template-xml-input",
+      "template-parse-button",
+      "template-preset-select",
+      "template-generated-form",
+      "template-output-code",
+      "template-copy-button"
+    ]
+  },
+  "image_urls": {
+    "voxel_robot_preview": "https://images.pexels.com/photos/33827091/pexels-photo-33827091.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "dark_pattern_bg": "https://images.pexels.com/photos/12843337/pexels-photo-12843337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  }
+}
