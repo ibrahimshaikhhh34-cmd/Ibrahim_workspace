@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -44,6 +44,7 @@ export const ProjectDialog = ({ open, project, onClose, onSaved }) => {
           <DialogTitle className="font-display text-2xl uppercase tracking-wide">
             {project ? "Edit Entry" : "New Entry"}
           </DialogTitle>
+          <DialogDescription className="text-xs text-[#6B7280]">Track a creature, weapon, block or item in your mod.</DialogDescription>
         </DialogHeader>
         <form onSubmit={submit} className="space-y-5">
           <div className="space-y-2">
