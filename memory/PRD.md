@@ -24,11 +24,17 @@ GitHub export requested at the end.
 ## Implemented (2026-06)
 - All 4 tabs, default tab = Project Tracker; desktop top tabs + mobile bottom dock.
 - Tracker CRUD with search/filters/stats; persisted in MongoDB.
-- Model Prep: GLB/OBJ preview, facing rotation, scaling, pivot modes, texture preview, icon capture, zip export (Models/, Textures/<Cat>/, Icons/), DAE forced Y_UP with normals/UVs.
+- Model Prep: GLB/glTF/OBJ preview, facing rotation, scaling, pivot modes, texture preview, icon capture, zip export. Formats: .dae (Y_UP, normals/UVs), .glb, .gltf+.bin. Layouts: Classic Content 2.x (Models/, Textures/<Cat>/, Icons/) or API 1.9 mod (Assets/ prefix + modinfo.json + Assets/Animations/<Name>.json stub for creatures).
 - Log Reader with grouping, counts, 4 known-pattern fixes, raw trace toggle, copy summary, sample log.
 - Template Builder with attribute/text-node extraction, grouped form, XML regeneration, copy/download, presets.
-- Testing agent iteration 1: backend 100%, frontend 100%.
+- Data Builder (tab 5) built from real Content 2.4 files user supplied (/app/reference): Creature (Lion EntityTemplate, all Parameters editable, fresh GUIDs toggle), Block & Item (79-column BlocksData.txt rows from Cobblestone / Chest), Recipe (<Recipe> with 3x3 tap grid). Texture atlas slot picker (16x16, optional Blocks.png preview). Snippet library persisted in Mongo (/api/snippets).
+- Testing agent iteration 1 & 2: backend 100%, frontend 100%.
+
+## SC2 research notes
+- API 1.9 (survivalcraft.dev): mods = .scmod zip with modinfo.json (Name, Version, ApiVersion 1.9.1.3, ScVersion 1.90.3.0, GameplayImpactLevel, PackageName, Author); Assets/Models (glTF/GLB recommended, .dae still supported), Assets/Animations/*.json (template FourLegged/Human/Bird/Fish, rootBoneRotation, modelScale), Assets/Lang/*.json, *.xdb databases (EntityTemplate inherits via InheritanceParent GUID; Wolf e4275171-…, FourLeggedModel base 76d24f74-…).
+- BlocksData.txt: 79 semicolon columns (header row + type row in mod .csv files); mods merge by Class Name.
+- Common tooling gaps in community: duplicate GUIDs, InheritanceParent typos, texture slot lookup — addressed by fresh-GUID generator and atlas picker.
 
 ## Backlog
-- P1: per-axis target-length choice (currently longest extent); bulk import/export of tracker as JSON.
-- P2: link tracker entries to exported zips; more known log patterns; glTF (Assets/Models) export path for new SC2 API.
+- P1: Strings.xml / Lang json builder; Clothes (.clo) builder; per-axis target-length choice; bulk tracker import/export.
+- P2: database.xml validator (duplicate GUID / unknown InheritanceParent scan) from a pasted full file; link tracker entries to exported zips; more known log patterns.

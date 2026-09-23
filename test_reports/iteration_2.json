@@ -1,0 +1,24 @@
+{
+  "summary": "Iteration 2 backend + frontend testing complete. Backend: 11/11 new pytest cases pass covering (a) POST /api/model/export with fmt=glb|gltf|dae and layout=classic|api (glb+classic → Models/<n>.glb; gltf+api+Creature → Assets/Models/<n>/<n>.gltf & <n>.bin with buffers[0].uri=<n>.bin, Assets/Animations/<n>.json template FourLegged, modinfo.json ApiVersion 1.9.1.3; dae+classic regression; texture placed under Assets/Textures/<Folder>/; fmt=stl → 422) and (b) snippets CRUD (GET list, POST 201 with persistence, invalid kind 422, empty content 422, DELETE 204, unknown 404). Frontend: Data Builder tab loads with Creature default; FrostWolf generation shows Name/WalkSpeed/ModelName correctly, InheritanceParent preserved, all GUIDs regenerated (original 9430a185 absent), fresh-guids toggle off restores original GUIDs; Block section produces exactly 78 semicolons (79 columns), starts 'FrostStoneBlock;Frost Stone;Construction;', contains ';37;' after atlas-slot-37 click, reset restores Cobblestone; Item section starts 'ChestBlock;Chest;Items;'; Recipe generates exact expected XML for IronAxeBlock; clearing RequiredPlayerLevel omits attribute; snippet save/copy/delete + persistence across reload works. Model Prep: model-format-select & model-layout-select present, preview text updates correctly (api+glb → 'Assets/Models/Name.glb ... modinfo.json'; api+gltf → 'Assets/Models/Name/Name.gltf + .bin ... modinfo.json'); uploading /tmp/uvbox.obj + glb + API layout + export ZIP fires download of uvbox_sc2.zip. Mobile viewport 390x844: all 5 tab-*-mobile buttons present and switch tabs.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter2.py",
+    "/app/backend/tests/test_backend.py",
+    "/app/test_reports/pytest/iter2_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "AtlasPicker uses tailwind classes grid-cols-16/grid-rows-16 which are not in Tailwind's default scale — may render as 1-col fallback unless tailwind.config extends grid. Functionally slots are clickable via data-testid, but visual grid may collapse. Consider extending tailwind.config or using inline style gridTemplateColumns/Rows: repeat(16, minmax(0, 1fr)).",
+    "server.py build_gltf_files replaces literal 'gltf_buffer.bin' string in the JSON — brittle to future trimesh version changes; parse JSON and rewrite buffers[0].uri instead for robustness.",
+    "Recipe error toast fires correctly, but rowsFromGrid() trims outer blank rows/cols which could cause surprising outputs vs the raw grid; consider showing the effective rows preview beside the live grid preview."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter2.py (new)"],
+  "success_rate": {"backend": "100% (11/11 new + iter1 suite reusable)", "frontend": "100%"},
+  "test_credentials": "None (no auth)",
+  "seed_data_creation": "Ephemeral TEST_ prefixed snippet and export payloads; snippet deleted at end of test; no residual data. During Playwright run 2 snippets left in DB from creature-save flow (Snippet library kept 2 items after delete).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Two reusable pytest files: /app/backend/tests/test_backend.py (iter1) and /app/backend/tests/test_iter2.py (iter2). Both can be run with pytest -n0 (parallel xdist loadscope may break class-scoped state — use -n0 or run test classes together). Data Builder testids: creature-field-<Label>, block-field-<NameNoSpace> (e.g. block-field-ClassName since 'Class Name' has space stripped), atlas-slot-<0..255>, recipe-cell-<r>-<c>, snippet-item/snippet-name/snippet-copy-button/snippet-delete-button. ModelPrep new testids: model-format-select, model-layout-select, model-export-preview. Mobile 5 tabs: tab-{tracker,model-prep,log-reader,template-builder,data-builder}-mobile. RecipeForm CELL_CYCLE is [' ','a','b','c']; default RECIPE_EXAMPLE.c is empty, so cycling any cell to 'c' triggers 'no CraftingId' toast (verified).",
+  "rca of the issue": "N/A — all tests green."
+}

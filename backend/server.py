@@ -237,8 +237,11 @@ def build_gltf_files(mesh: trimesh.Trimesh, safe_name: str, binary: bool) -> dic
     out = {}
     for fname, data in files.items():
         if fname.endswith(".gltf"):
-            text = data.decode("utf-8").replace("gltf_buffer.bin", f"{safe_name}.bin")
-            out[f"{safe_name}.gltf"] = text.encode("utf-8")
+            doc = json.loads(data.decode("utf-8"))
+            for b in doc.get("buffers", []):
+                if "uri" in b:
+                    b["uri"] = f"{safe_name}.bin"
+            out[f"{safe_name}.gltf"] = json.dumps(doc, indent=2).encode("utf-8")
         elif fname.endswith(".bin"):
             out[f"{safe_name}.bin"] = data
         else:
