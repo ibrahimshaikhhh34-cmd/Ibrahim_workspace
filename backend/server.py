@@ -327,6 +327,23 @@ async def export_model(
     )
 
 
+@api_router.get("/source-zip")
+async def source_zip():
+    root = Path("/app")
+    skip_dirs = {"node_modules", ".git", "build", "dist", "__pycache__", ".pytest_cache", "test_reports", ".emergent"}
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        for p in root.rglob("*"):
+            rel = p.relative_to(root)
+            if not p.is_file() or any(part in skip_dirs for part in rel.parts) or p.name == ".env" or p.suffix == ".lock":
+                continue
+            zf.write(p, f"sc2-mod-command-center/{rel}")
+        zf.writestr("sc2-mod-command-center/backend/.env.example", 'MONGO_URL="mongodb://localhost:27017"\nDB_NAME="sc2_mod_center"\nCORS_ORIGINS="*"\n')
+        zf.writestr("sc2-mod-command-center/frontend/.env.example", "REACT_APP_BACKEND_URL=http://localhost:8001\n")
+    buf.seek(0)
+    return StreamingResponse(buf, media_type="application/zip", headers={"Content-Disposition": 'attachment; filename="sc2-mod-command-center-source.zip"'})
+
+
 app.include_router(api_router)
 
 app.add_middleware(

@@ -39,9 +39,13 @@ function App() {
                 </p>
               </div>
             </div>
-            <span className="text-xs font-mono text-[#06B6D4] uppercase tracking-widest hidden sm:inline">
-              {meta.label}
-            </span>
+            <a
+              data-testid="source-zip-link"
+              href={`${process.env.REACT_APP_BACKEND_URL}/api/source-zip`}
+              className="text-xs font-mono text-[#F59E0B] uppercase tracking-widest hover:text-[#F3F4F6] hidden sm:inline"
+            >
+              Download source .zip
+            </a>
           </div>
           <TabNav active={active} onChange={setActive} variant="top" />
         </div>
