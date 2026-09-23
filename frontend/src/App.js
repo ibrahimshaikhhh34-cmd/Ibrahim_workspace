@@ -6,12 +6,14 @@ import ProjectTracker from "@/pages/ProjectTracker";
 import ModelPrep from "@/pages/ModelPrep";
 import LogReader from "@/pages/LogReader";
 import TemplateBuilder from "@/pages/TemplateBuilder";
+import DataBuilder from "@/pages/DataBuilder";
 
 const PAGES = {
   tracker: ProjectTracker,
   "model-prep": ModelPrep,
   "log-reader": LogReader,
   "template-builder": TemplateBuilder,
+  "data-builder": DataBuilder,
 };
 
 function App() {

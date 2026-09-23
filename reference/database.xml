@@ -1,0 +1,203 @@
+</ParameterSet>
+          </EntityTemplate>
+          <EntityTemplate Name="Lion" Guid="9430a185-85a1-426c-8bbb-1e681f9413f9" InheritanceParent="e4275171-a39f-413f-8888-4c472868364d">
+            <MemberComponentTemplate Name="FeedBehavior" Guid="0231b16f-481e-4a57-89e6-4a5026495a3a" InheritanceParent="3d5c9b46-1592-45de-ae90-9d050021a5ad">
+              <Parameter Name="AutoFeed" Guid="582588ab-a0e1-40e3-9953-7e105d86818e" Value="False" Type="bool" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="FourLeggedModel" Guid="18eda354-6f37-40d4-8936-e7c79f45236e" InheritanceParent="76d24f74-5f25-4d30-92ef-658c1a4d66c8">
+              <Parameter Name="CanTrot" Guid="03a2759a-2391-46cb-9101-fb8245bf4c76" Value="True" Type="bool" />
+              <Parameter Name="WalkBobHeight" Guid="2109cd73-e3ab-4994-8026-5783bf7a1cf6" Value="0.03" Type="float" />
+              <Parameter Name="CanterLegsAngleFactor" Guid="566bea31-da99-49f2-acb5-5e3aed5879cd" Value="1.65" Type="float" />
+              <Parameter Name="UseCanterSound" Guid="5ed3e28a-248d-439e-b1cf-f6a30b2a8592" Value="False" Type="bool" />
+              <Parameter Name="ModelName" Guid="75995131-7275-4f2f-ae7c-b2f72f38c7c9" Value="Models/Lion" Type="string" />
+              <Parameter Name="WalkAnimationSpeed" Guid="7ebaa0bc-d0dc-4498-ac09-a8e874a4a958" Value="0.6" Type="float" />
+              <Parameter Name="WalkHindLegsAngle" Guid="c413e42d-edc9-4e4a-ba6c-a8b65d830705" Value="0.4" Type="float" />
+              <Parameter Name="WalkFrontLegsAngle" Guid="d063a712-c456-4a78-94aa-e010d3f3ba6e" Value="0.55" Type="float" />
+              <Parameter Name="TextureOverride" Guid="fb9f784f-c1ef-40aa-a921-097a0bc59b71" Value="Textures/Creatures/Lion" Type="string" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Miner" Guid="46ab77a3-58cd-4457-9072-d7733c311fdb" InheritanceParent="8acca888-ba39-464f-bcf5-6ae15e448c62">
+              <Parameter Name="AttackPower" Guid="e8537845-827b-4234-bb57-b55e9d4f7f3e" Value="3.5" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="ChaseBehavior" Guid="470b1156-830b-4324-99f2-fb292d2897f5" InheritanceParent="31894441-d90a-4549-9264-db9dbe20e234">
+              <Parameter Name="ChaseNonPlayerProbability" Guid="0bb18f7f-f70a-46c5-9518-3c93650cde1e" Value="0.03" Type="float" />
+              <Parameter Name="DayChaseRange" Guid="1bb139b5-e29f-4c10-8723-c7c09b81b613" Value="8" Type="float" />
+              <Parameter Name="NightChaseRange" Guid="292b517b-d23b-4390-8add-057bf72fe8bb" Value="10" Type="float" />
+              <Parameter Name="NightChaseTime" Guid="8dd894fb-9873-4753-b881-f7c6c5e6084f" Value="15" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Creature" Guid="492c92fa-eb11-457f-8fea-459ef4fe1d2b">
+              <Parameter Name="Description" Guid="379059ff-499b-44a6-a167-65889be34e99" Value="A large cat. Powerful and fast, likes to hunt at night. Larger than Leopard or Jaguar, but not as dangerous as Tiger." Type="string" />
+              <Parameter Name="KillVerbs" Guid="5fef0879-5e36-41f8-b8d4-7f6bf2805750" Value="hunted,eaten" Type="string" />
+              <Parameter Name="Category" Guid="8ac038cc-a8ea-486b-a7a3-7f6bb98ef749" Value="LandPredator" Type="Game.CreatureCategory" />
+              <Parameter Name="DisplayName" Guid="908c6076-6839-4c76-b377-cae0e1bf826e" Value="Lion" Type="string" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Health" Guid="644ccc2f-95bf-4888-a3cc-c799ba910ad6">
+              <Parameter Name="AttackResilience" Guid="09928518-be76-4738-890c-b6af6dff49a9" Value="40" Type="float" />
+              <Parameter Name="FireResilience" Guid="848889a4-91f7-4696-9bfd-373921757b65" Value="15" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="WalkAroundBehavior" Guid="67eb17c9-6c2f-4c15-be0c-ee7a9c490a5f" InheritanceParent="aebb86ce-4ee6-4ca0-850d-cd60051e1d71" />
+            <MemberComponentTemplate Name="OnFire" Guid="6a069da7-399c-4afc-b571-f4d9303ec102" />
+            <MemberComponentTemplate Name="Body" Guid="6b9338ad-e8ec-4076-9738-018078f01d7b">
+              <Parameter Name="BoxSize" Guid="30f342fe-78e9-4372-84ec-f9bc0acacfd7" Value="0.95,0.95,0.95" Type="Vector3" />
+              <Parameter Name="Mass" Guid="cea5155d-61c9-4145-a607-2708af026495" Value="200" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="CreatureSounds" Guid="94f38cb9-25c6-4966-a9ed-d156e29f13c4">
+              <Parameter Name="IdleSound" Guid="14b7d439-ad78-46f0-961d-3665f6c601e8" Value="Audio/Creatures/LionIdle" Type="string" />
+              <Parameter Name="AttackSound" Guid="30f22486-57f5-43f0-8c7e-c581db877745" Value="Audio/Creatures/LionRoar" Type="string" />
+              <Parameter Name="PainSound" Guid="a656a2ac-35d6-444b-a8d2-bb2e9fbdfe25" Value="Audio/Creatures/LionRoar" Type="string" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Loot" Guid="9fddcc10-1bf6-4034-8430-e74ea68dcfbb">
+              <ParameterSet Name="Loot" Guid="236a99d6-e535-4411-88c1-c2a65ca4beb5">
+                <Parameter Name="1" Guid="d7b7995b-43b8-43af-9901-90076b9e630d" Value="LeatherBlock;1;1" Type="string" />
+                <Parameter Name="2" Guid="fd689d53-f99d-475a-9e2f-61200742ae83" Value="RottenMeatBlock;1;1;0.5" Type="string" />
+              </ParameterSet>
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="EatPickableBehavior" Guid="a2f5d1a9-8ceb-449e-97c1-ecc224d0bf6d">
+              <ParameterSet Name="FoodFactors" Guid="40152ab3-c4a6-404d-92fa-b8e934cea96f">
+                <Parameter Name="Fish" Guid="4062f03a-0b65-4851-b81b-88cf2840aee4" Value="1" Type="float" />
+                <Parameter Name="Meat" Guid="b117b2bb-74b8-4de5-98cd-e1d2f1e16616" Value="1" Type="float" />
+              </ParameterSet>
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="AvoidPlayerBehavior" Guid="ce4d5c7e-222c-496b-82cf-e74259e98986" InheritanceParent="3942e891-6b50-467c-8da5-a15bc63e59e0">
+              <Parameter Name="NightRange" Guid="5ddd1da2-cdf1-4ce7-bc29-d6b7b191b094" Value="0" Type="float" />
+              <Parameter Name="DayRange" Guid="6f74ed1c-ae21-456b-9ab3-b1237f5cc3c2" Value="12" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="FindPlayerBehavior" Guid="dc53c311-a1a4-449e-a41c-a0fa6b3875c7" InheritanceParent="44c9a961-258c-4eb3-81d1-d3ae249ae031" />
+            <MemberComponentTemplate Name="AvoidFireBehavior" Guid="f5c17875-5e49-4b9b-90c0-1837d4b994db" InheritanceParent="885b2df5-b47b-4c53-bda0-5c1a0c988a3c" />
+            <MemberComponentTemplate Name="Locomotion" Guid="fda9d374-e7ef-4b8d-b17c-3cc484649a9d">
+              <Parameter Name="AccelerationFactor" Guid="0a1775b5-9ffe-49ad-97f1-f9e43cdd7cb5" Value="0.75" Type="float" />
+              <Parameter Name="TurnSpeed" Guid="302216d4-96be-4870-ab49-80218ead2d12" Value="6" Type="float" />
+              <Parameter Name="LadderSpeed" Guid="77eacaa9-e2a0-4c02-99b4-18aea534bcc8" Value="0" Type="float" />
+              <Parameter Name="FlySpeed" Guid="816c626a-bc48-4593-a186-94853e546265" Value="0" Type="float" />
+              <Parameter Name="WalkSpeed" Guid="f9b94f45-7092-484b-9460-0375b45f15bd" Value="4.7" Type="float" />
+            </MemberComponentTemplate>
+            <ParameterSet Name="CreatureEggData" Guid="58df160b-42f1-4be0-be23-14f18f57ef22">
+              <Parameter Name="Color" Guid="0532865b-ff05-41a0-a889-ea7af8a7ae9f" Value="224,138,39" Type="Color" />
+              <Parameter Name="EggTypeIndex" Guid="40410b86-86cb-4fbe-8483-1e71becdf8ee" Value="26" Type="int" />
+              <Parameter Name="DisplayName" Guid="4b4e6800-729c-4352-9eb8-8516b3fe700e" Value="Lion" Type="string" />
+              <Parameter Name="SwapUV" Guid="7d464535-911e-4f4c-a08a-9b423efeb030" Value="False" Type="bool" />
+              <Parameter Name="TextureSlot" Guid="a855426c-a90a-4368-8528-1ac43125ea1c" Value="163" Type="int" />
+            </ParameterSet>
+
+
+
+
+
+
+
+ </EntityTemplate>
+          <EntityTemplate Name="Reindeer" Guid="4e0b98d5-4986-49f8-a627-ab63e9097a89" InheritanceParent="e4275171-a39f-413f-8888-4c472868364d">
+            <MemberComponentTemplate Name="CreatureSounds" Guid="34356507-f9e3-497e-ab22-7dd1acb3aea0">
+              <Parameter Name="AttackSound" Guid="3673358d-6af1-4ba3-9b64-902c120ccf53" Value="Audio/Creatures/Reindeer" Type="string" />
+              <Parameter Name="PainSound" Guid="a6f9d77b-71a6-41c3-9fc8-dd61eb6fad13" Value="Audio/Creatures/Reindeer" Type="string" />
+              <Parameter Name="IdleSound" Guid="ac640e64-785b-4b84-9656-c26554442aaf" Value="Audio/Creatures/Reindeer" Type="string" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="WalkAroundBehavior" Guid="39560209-e143-4f8a-bda0-e3db58de1ee7" InheritanceParent="aebb86ce-4ee6-4ca0-850d-cd60051e1d71" />
+            <MemberComponentTemplate Name="Locomotion" Guid="3fb70eaa-61f6-49c5-b530-c03a8898866a">
+              <Parameter Name="WalkSpeed" Guid="31a0cbe2-5927-45b0-b240-c1eb9dca5111" Value="4.7" Type="float" />
+              <Parameter Name="FlySpeed" Guid="55fdfb4b-e2a0-4a04-9e6d-a47db72ece76" Value="0" Type="float" />
+              <Parameter Name="MinFrictionFactor" Guid="9eda292d-bb71-4055-9509-f55b12581392" Value="0.2" Type="float" />
+              <Parameter Name="LadderSpeed" Guid="d225a5bc-5a9f-44eb-bb71-72dedca3b7f8" Value="0" Type="float" />
+              <Parameter Name="LookSpeed" Guid="d601512c-cb10-4b65-812d-c02d7cfba7db" Value="4" Type="float" />
+              <Parameter Name="AccelerationFactor" Guid="d943125b-8fff-4c7c-996c-4f698828a92d" Value="0.75" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="HerdBehavior" Guid="4ec7a260-5ee0-4751-885c-f8d5ca21b2d5" InheritanceParent="dfe7218e-ce14-4bde-8dac-f919c38e9efe">
+              <Parameter Name="HerdName" Guid="bfa3f7dc-5275-469b-9a2b-971101420695" Value="Reindeer" Type="string" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="EatPickableBehavior" Guid="51de2f3f-eec0-44c8-aa0d-659e49ab25fa">
+              <ParameterSet Name="FoodFactors" Guid="34cfee5f-cad1-46bd-82cd-26f111bb763a">
+                <Parameter Name="Grass" Guid="3cba90f4-aa06-4072-885f-a49a1e19eea7" Value="1" Type="float" />
+              </ParameterSet>
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="OnFire" Guid="706ec99e-5587-472b-a2c1-0797773efdc7" />
+            <MemberComponentTemplate Name="Body" Guid="8235611f-3891-430c-a180-cdad7c05d21e">
+              <Parameter Name="BoxSize" Guid="1e5b7044-dcbc-4c5b-b7bc-d2e76a3a850f" Value="1.2,1.2,1.2" Type="Vector3" />
+              <Parameter Name="Density" Guid="26305b3b-787a-4099-a0b2-63b9ad324377" Value="0.8" Type="float" />
+              <Parameter Name="Mass" Guid="bc351678-ffc7-4d32-b416-62c928a27135" Value="220" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="AvoidPlayerBehavior" Guid="872b1a5b-1aa9-4300-8f06-01adf798bbcb" InheritanceParent="3942e891-6b50-467c-8da5-a15bc63e59e0" />
+            <MemberComponentTemplate Name="Creature" Guid="9a5e9ebc-caa5-42bc-95e8-c1ec4c9492f9">
+              <Parameter Name="DisplayName" Guid="3afb2803-85f7-42b8-ab12-1fc32f663af3" Value="Reindeer" Type="string" />
+              <Parameter Name="KillVerbs" Guid="7d36aebf-97eb-4860-85eb-d3c4d04b096e" Value="kicked,trampled" Type="string" />
+              <Parameter Name="Category" Guid="fe8b399f-e20c-41a4-8e06-4c7e38fcc945" Value="LandOther" Type="Game.CreatureCategory" />
+              <Parameter Name="Description" Guid="ffab8aae-5bac-4044-b879-faf0313cb426" Value="A medium size plant eating mammal. Docile despite the pair of formidable antlers. Lives in herds in cold areas. Delicious to eat." Type="string" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Loot" Guid="a45417ad-5de0-41d2-a712-746b07426daa">
+              <ParameterSet Name="Loot" Guid="f1b6f0ba-70b9-46df-b236-56ac043b719a">
+                <Parameter Name="1" Guid="5f55b02b-b55a-4a63-8cee-1a5fa91a7189" Value="RawMeatBlock;2;2" Type="string" />
+              </ParameterSet>
+              <ParameterSet Name="LootOnFire" Guid="fdfc4d27-15b0-486c-ac5a-4e95897b194c">
+                <Parameter Name="1" Guid="381e96cb-b787-41b3-824e-93b91a597d92" Value="CookedMeatBlock;2;2" Type="string" />
+              </ParameterSet>
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="FourLeggedModel" Guid="e1140d7a-acbf-403b-a56f-166fc036130b" InheritanceParent="76d24f74-5f25-4d30-92ef-658c1a4d66c8">
+              <Parameter Name="WalkAnimationSpeed" Guid="63868280-3ca7-4dd3-88e0-237498db7c72" Value="0.6" Type="float" />
+              <Parameter Name="WalkHindLegsAngle" Guid="843e8f98-15ed-477e-9915-4b0113e26780" Value="0.32" Type="float" />
+              <Parameter Name="CanterLegsAngleFactor" Guid="853efa7d-47db-46bd-bcd6-1c15d32fce41" Value="1.65" Type="float" />
+              <Parameter Name="WalkBobHeight" Guid="9895aca6-9ab1-47d1-a915-e902e63f68b9" Value="0.05" Type="float" />
+              <Parameter Name="CanTrot" Guid="aa52e255-cf37-4892-94a5-fc0c1e2fd120" Value="True" Type="bool" />
+              <Parameter Name="TextureOverride" Guid="bbd4652e-0b7e-480e-9351-e69c3f4f673f" Value="Textures/Creatures/Reindeer" Type="string" />
+              <Parameter Name="ModelName" Guid="d0528ac7-22cb-41ac-a13a-c1e1e5d3ad0a" Value="Models/Reindeer" Type="string" />
+              <Parameter Name="WalkFrontLegsAngle" Guid="eb65c01d-96ea-49e2-a546-705c6ce9c6e6" Value="0.45" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Health" Guid="e6618ad7-dba7-4cfa-8be2-3a276da5630d">
+              <Parameter Name="AttackResilience" Guid="5f7b57d5-506c-45f2-b3b1-3ad9406d5b81" Value="25" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Miner" Guid="f1bc3181-a847-4ff5-acac-1b1a44d994f6" InheritanceParent="8acca888-ba39-464f-bcf5-6ae15e448c62">
+              <Parameter Name="AttackPower" Guid="dc48cd1f-a251-4de7-856f-46e556d50828" Value="1" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="FeedBehavior" Guid="fdf9b6c4-acfb-44f7-84fd-5697179ffe03" InheritanceParent="3d5c9b46-1592-45de-ae90-9d050021a5ad" />
+            <ParameterSet Name="CreatureEggData" Guid="807ccecb-bf3b-44d5-88ba-43367f41a9f8">
+              <Parameter Name="TextureSlot" Guid="2350924c-504e-4341-a50b-38471647fbd3" Value="163" Type="int" />
+              <Parameter Name="SwapUV" Guid="41150bc6-71cf-45c4-9bf4-5515f8337f11" Value="False" Type="bool" />
+              <Parameter Name="Color" Guid="6335e616-d264-47b8-8496-91b4b6355dd1" Value="122,109,90" Type="Color" />
+              <Parameter Name="EggTypeIndex" Guid="d06ff3bf-bba4-479e-98a8-16f7aa2f2d7e" Value="29" Type="int" />
+              <Parameter Name="DisplayName" Guid="d98415d2-5573-41eb-9660-5afd9e17233d" Value="Reindeer" Type="string" />
+            </ParameterSet>
+
+
+
+
+
+     </EntityTemplate>
+          <EntityTemplate Name="Shark_GreatWhite" Guid="eb70714a-ee32-4812-8713-33726faaf1a3" InheritanceParent="f5333076-a57d-4864-a30e-19072248224f">
+            <MemberComponentTemplate Name="Loot" Guid="23a34a02-5a53-48e4-9f89-407a8b96c74e">
+              <ParameterSet Name="Loot" Guid="d53f4801-7595-4882-a916-c28074b8507b">
+                <Parameter Name="1" Guid="b16d8590-2463-46eb-879f-e3b0bf013762" Value="RawFishBlock;8;10" Type="string" />
+              </ParameterSet>
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="ChaseBehavior" Guid="29922724-cd50-43af-a58f-cf753b093416">
+              <Parameter Name="NightChaseRange" Guid="4302a6da-b752-474d-a1f0-627d3f21d47b" Value="20" Type="float" />
+              <Parameter Name="DayChaseRange" Guid="4bcd7423-af49-42f0-8caa-9dbd69afcd7b" Value="10" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Creature" Guid="2eb77806-e2eb-4bfd-b1f3-948601d12705">
+              <Parameter Name="DisplayName" Guid="3bb09378-8ccf-40fb-8688-5f9e50d2a557" Value="Great White Shark" Type="string" />
+              <Parameter Name="Description" Guid="baa8f44f-4573-4347-9f99-23b0889fe1e1" Value="A huge, aggressive ocean shark. Will chase anything that comes close in the water. Has very good smell and will home on its prey from far away. Extremely strong, will kill all land animals easily. Only whales can withstand its ferocious attack." Type="string" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Body" Guid="2fd1261a-6a06-4cc2-bc6d-fcea096f40c2">
+              <Parameter Name="BoxSize" Guid="9c6c0db1-f1e9-4d99-97e3-07a1e37cfd92" Value="2.9,0.8,2.9" Type="Vector3" />
+              <Parameter Name="Mass" Guid="c494be2a-9461-4c7c-8734-ecb8fc4d1fdb" Value="1000" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Miner" Guid="a2ac0dfd-8702-40be-95f6-eadd5206d1f4" InheritanceParent="8acca888-ba39-464f-bcf5-6ae15e448c62">
+              <Parameter Name="AttackPower" Guid="64bce4fe-220e-4be1-b954-d10c6d819f82" Value="7" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Locomotion" Guid="be6fbafa-a80e-4b72-b7ad-a20f5c9e8571">
+              <Parameter Name="TurnSpeed" Guid="c0070763-c020-4ef0-8081-c11d7f2dc769" Value="3" Type="float" />
+              <Parameter Name="SwimSpeed" Guid="d17499e6-911d-437d-861d-01b0cf5e1dc9" Value="5.5" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="FishModel" Guid="ef1f735e-db88-44f0-8ed6-7b7ea6bfb739">
+              <Parameter Name="ModelName" Guid="7a279002-affe-4d7c-989e-cd46dbe3026a" Value="Models/Shark_GreatWhite" Type="string" />
+              <Parameter Name="TextureOverride" Guid="a874600f-41c5-46e6-b399-e8520e50b6f8" Value="Textures/Creatures/Shark_GreatWhite" Type="string" />
+              <Parameter Name="BoundingSphereRadius" Guid="c0e4c0dc-63d7-48eb-8077-d8b4c7864faf" Value="4" Type="float" />
+              <Parameter Name="SwimAnimationSpeed" Guid="f037865e-5969-4a4a-9f1e-3c256b880ec1" Value="0.9" Type="float" />
+            </MemberComponentTemplate>
+            <MemberComponentTemplate Name="Health" Guid="fb985d83-8e19-4e42-9706-2917eb6a8eee">
+              <Parameter Name="AttackResilience" Guid="c514ff74-36e7-41ed-bcf5-63f947a92324" Value="240" Type="float" />
+            </MemberComponentTemplate>
+            <ParameterSet Name="CreatureEggData" Guid="a3ef76f7-ef54-4e08-aeff-33ea90da5fd2">
+              <Parameter Name="EggTypeIndex" Guid="087ae04f-f688-4bbc-aa42-5709cbe7cde9" Value="46" Type="int" />
+              <Parameter Name="TextureSlot" Guid="1849c0ac-bfee-4398-bba0-c330bf3e705a" Value="163" Type="int" />
+              <Parameter Name="DisplayName" Guid="69addde5-b2f6-4225-9b79-6482c36368bf" Value="Great White" Type="string" />
+              <Parameter Name="SwapUV" Guid="bc53fafe-9d00-46f8-9419-c8b6517f042b" Value="True" Type="bool" />
+              <Parameter Name="ShowEgg" Guid="cb97a95f-6374-4496-af85-f65962099dc5" Value="True" Type="bool" />
+              <Parameter Name="Color" Guid="f6593a2e-9552-43e2-a83a-b9c4532c1a9e" Value="115,144,164" Type="Color" />
+            </ParameterSet>

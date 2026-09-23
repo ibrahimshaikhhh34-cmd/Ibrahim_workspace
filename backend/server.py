@@ -6,6 +6,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import io
 import re
+import json
 import base64
 import zipfile
 import logging
@@ -85,6 +86,46 @@ async def delete_project(project_id: str):
     result = await db.projects.delete_one({"id": project_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Project not found")
+    return None
+
+
+# ---------------- Data Builder snippets ----------------
+
+SnippetKind = Literal["Creature", "Block", "Item", "Recipe"]
+
+
+class Snippet(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    kind: SnippetKind
+    name: str
+    content: str
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+
+class SnippetIn(BaseModel):
+    kind: SnippetKind
+    name: str = Field(min_length=1, max_length=120)
+    content: str = Field(min_length=1, max_length=200000)
+
+
+@api_router.get("/snippets", response_model=List[Snippet])
+async def list_snippets():
+    return await db.snippets.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
+
+
+@api_router.post("/snippets", response_model=Snippet, status_code=201)
+async def create_snippet(body: SnippetIn):
+    snippet = Snippet(**body.model_dump())
+    await db.snippets.insert_one(snippet.model_dump())
+    return snippet
+
+
+@api_router.delete("/snippets/{snippet_id}", status_code=204)
+async def delete_snippet(snippet_id: str):
+    result = await db.snippets.delete_one({"id": snippet_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Snippet not found")
     return None
 
 
@@ -181,6 +222,56 @@ async def inspect_model(file: UploadFile = File(...)):
     return {"filename": file.filename, **mesh_info(mesh)}
 
 
+def attach_texture(mesh: trimesh.Trimesh, texture_bytes: Optional[bytes]) -> None:
+    if not texture_bytes or mesh.visual.kind != "texture" or getattr(mesh.visual, "uv", None) is None:
+        return
+    from PIL import Image
+    img = Image.open(io.BytesIO(texture_bytes)).convert("RGBA")
+    mesh.visual = trimesh.visual.TextureVisuals(uv=mesh.visual.uv, image=img)
+
+
+def build_gltf_files(mesh: trimesh.Trimesh, safe_name: str, binary: bool) -> dict:
+    if binary:
+        return {f"{safe_name}.glb": trimesh.exchange.gltf.export_glb(mesh, include_normals=True)}
+    files = trimesh.exchange.gltf.export_gltf(mesh, include_normals=True, merge_buffers=True)
+    out = {}
+    for fname, data in files.items():
+        if fname.endswith(".gltf"):
+            text = data.decode("utf-8").replace("gltf_buffer.bin", f"{safe_name}.bin")
+            out[f"{safe_name}.gltf"] = text.encode("utf-8")
+        elif fname.endswith(".bin"):
+            out[f"{safe_name}.bin"] = data
+        else:
+            out[fname] = data
+    return out
+
+
+def animation_stub(name: str) -> str:
+    return json.dumps({
+        "template": "FourLegged",
+        "rootBoneRotation": 0,
+        "modelScale": 1.0,
+        "animations": {
+            "idle": {"source": "Idle", "speed": 1.0, "loop": True, "blendDuration": 0.3},
+            "walk": {"source": "Walk", "speed": "[SpeedAbs] * 0.65", "loop": True, "blendDuration": 0.2},
+        },
+        "states": {
+            "gait": {"layer": "Base", "rules": [
+                {"condition": "IsDead", "animation": None},
+                {"condition": "[SpeedAbs] > 0.3", "animation": {"source": "walk"}},
+                {"condition": "true", "animation": {"source": "idle"}},
+            ]},
+        },
+    }, indent=2)
+
+
+def modinfo_stub(name: str) -> str:
+    return json.dumps({
+        "Name": name, "Version": "1.0.0", "ApiVersion": "1.9.1.3", "Description": f"Adds {name}",
+        "ScVersion": "1.90.3.0", "GameplayImpactLevel": "Cosmetic", "PackageName": f"yourname.{name}", "Author": "YourName",
+    }, indent=2)
+
+
 @api_router.post("/model/export")
 async def export_model(
     file: UploadFile = File(...),
@@ -189,6 +280,8 @@ async def export_model(
     category: Literal["Creature", "Item", "Block"] = Form(...),
     facing: str = Form("+Z"),
     target_length: float = Form(1.0),
+    fmt: Literal["dae", "glb", "gltf"] = Form("dae"),
+    layout: Literal["classic", "api"] = Form("classic"),
     texture: Optional[UploadFile] = File(None),
     icon: Optional[str] = Form(None),
 ):
@@ -199,16 +292,30 @@ async def export_model(
     mesh = await read_model_upload(file)
     texture_bytes = await texture.read() if texture is not None else extract_embedded_texture(mesh)
     processed = transform_mesh(mesh, facing, max(target_length, 0.001), mode)
-    dae_bytes = build_dae(processed, f"{safe_name}.png")
+    attach_texture(processed, texture_bytes)
 
+    root = "Assets/" if layout == "api" else ""
     folder = CATEGORY_FOLDER[category]
+    icon_bytes = base64.b64decode(icon.split(",", 1)[1]) if icon and icon.startswith("data:image/png;base64,") else None
+
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr(f"Models/{safe_name}.dae", dae_bytes)
-        if texture_bytes:
-            zf.writestr(f"Textures/{folder}/{safe_name}.png", texture_bytes)
-        if icon and icon.startswith("data:image/png;base64,"):
-            zf.writestr(f"Icons/{safe_name}.png", base64.b64decode(icon.split(",", 1)[1]))
+        if fmt == "dae":
+            zf.writestr(f"{root}Models/{safe_name}.dae", build_dae(processed, f"{safe_name}.png"))
+            if texture_bytes:
+                zf.writestr(f"{root}Textures/{folder}/{safe_name}.png", texture_bytes)
+        else:
+            model_dir = f"{root}Models/{safe_name}/" if fmt == "gltf" else f"{root}Models/"
+            for fname, data in build_gltf_files(processed, safe_name, fmt == "glb").items():
+                zf.writestr(f"{model_dir}{fname}", data)
+            if texture_bytes:
+                zf.writestr(f"{root}Textures/{folder}/{safe_name}.png", texture_bytes)
+        if icon_bytes:
+            zf.writestr(f"{root}Icons/{safe_name}.png", icon_bytes)
+        if layout == "api":
+            if category == "Creature":
+                zf.writestr(f"Assets/Animations/{safe_name}.json", animation_stub(safe_name))
+            zf.writestr("modinfo.json", modinfo_stub(safe_name))
     buf.seek(0)
     return StreamingResponse(
         buf,

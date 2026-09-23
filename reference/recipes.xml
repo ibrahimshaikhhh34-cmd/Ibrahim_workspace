@@ -1,0 +1,183 @@
+</Recipe>
+    <Recipe Result="IronAxeBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="stick" b="ironingot" Description="Make an iron tool">
+      "bb"
+      "ba"
+      " a"
+    </Recipe>
+    <Recipe Result="IronRakeBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="stick" b="ironingot" Description="Make an iron tool">
+      "b b"
+      " a"
+      " a"
+    </Recipe>
+    <Recipe Result="IronHammerBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="stick" b="ironingot" Description="Make an iron tool">
+      "bbb"
+      "bab"
+      " a"
+    </Recipe>
+  </IronTools>
+  <DiamondTools>
+    <Recipe Result="DiamondShovelBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="ironshovel" b="diamond" Description="Add diamonds to the working edge of the tool">
+      " b"
+      "bab"
+    </Recipe>
+    <Recipe Result="DiamondPickaxeBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="ironpickaxe" b="diamond" Description="Add diamonds to the working edge of the tool">
+      " b"
+      "bab"
+    </Recipe>
+    <Recipe Result="DiamondAxeBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="ironaxe" b="diamond" Description="Add diamonds to the working edge of the tool">
+      " b"
+      "bab"
+    </Recipe>
+    <Recipe Result="DiamondRakeBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="ironrake" b="diamond" Description="Add diamonds to the working edge of the tool">
+      " b"
+      "bab"
+    </Recipe>
+  </DiamondTools>
+  <OtherTools>
+    <Recipe Result="EmptyBucketBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="2" a="copperingot" Description="Make a copper tool">
+      "a a"
+      " a"
+    </Recipe>
+    <Recipe Result="MagnetBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="ironingot" Description="Make a magnet to set attraction point for the compass">
+      "a a "
+      "a a"
+      "aaa "
+    </Recipe>
+    <Recipe Result="CompassBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="copperingot" b="diamond" Description="Make a compass to always know the way home">
+      " a "
+      "aba"
+      " a "
+    </Recipe>
+    <Recipe Result="ThermometerBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="ironingot" b="malachitechunk" Description="Make a thermometer to measure ambient temperature">
+      " b "
+      "aba"
+      " b "
+    </Recipe>
+    <Recipe Result="HygrometerBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="ironingot" b="malachitechunk" Description="Make a hydrometer to measure ambient humidity">
+      " a "
+      "bbb"
+      " a "
+    </Recipe>
+  </OtherTools>
+  <Weapons>
+    <Recipe Result="WoodenSpearBlock" ResultCount="1" RequiredHeatLevel="0" a="stick" b="planks" Description="Make a wooden weapon">
+      " b"
+      "bab"
+      " a"
+    </Recipe>
+    <Recipe Result="WoodenClubBlock" ResultCount="1" RequiredHeatLevel="0" a="stick" b="planks" Description="Make a wooden weapon">
+      "b"
+      "b"
+      "a"
+    </Recipe>
+    <Recipe Result="StoneClubBlock" ResultCount="1" RequiredHeatLevel="0" a="stick" b="cobblestone" Description="Make a stone weapon">
+      "b"
+      "b"
+      "a"
+    </Recipe>
+    <Recipe Result="StoneClubBlock" ResultCount="1" RequiredHeatLevel="0" a="stick" b="stonechunk" Description="Make a stone weapon">
+      "b"
+      "b"
+      "a"
+    </Recipe>
+    <Recipe Result="StoneSpearBlock" ResultCount="1" RequiredHeatLevel="0" a="stick" b="cobblestone" Description="Make a stone weapon">
+      " b"
+      "bab"
+      " a"
+    </Recipe>
+    <Recipe Result="StoneSpearBlock" ResultCount="1" RequiredHeatLevel="0" a="stick" b="stonechunk" Description="Make a stone weapon">
+      " b"
+      "bab"
+      " a"
+    </Recipe>
+    <Recipe Result="CopperSpearBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="2" a="stick" b="copperingot" Description="Make a copper weapon">
+      " b"
+      "bab"
+      " a"
+    </Recipe>
+    <Recipe Result="CopperMacheteBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="2" a="stick" b="copperingot" Description="Make a copper weapon">
+      "b"
+      "b"
+      "a"
+    </Recipe>
+    <Recipe Result="IronSpearBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="stick" b="ironingot" Description="Make an iron weapon">
+      " b"
+      "bab"
+      " a"
+    </Recipe>
+    <Recipe Result="IronMacheteBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="stick" b="ironingot" Description="Make an iron weapon">
+      "b"
+      "b"
+      "a"
+    </Recipe>
+    <Recipe Result="DiamondSpearBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="ironspear" b="diamond" Description="Add diamonds to the cutting edge of the weapon">
+      " b"
+      "bab"
+    </Recipe>
+    <Recipe Result="DiamondMacheteBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="ironmachete" b="diamond" Description="Add diamonds to the cutting edge of the weapon">
+      " b"
+      "bab"
+    </Recipe>
+    <Recipe Result="BowBlock" ResultCount="1" RequiredHeatLevel="0" a="stick" b="string" Description="Make a bow from sticks and a string">
+      " ab"
+      "a b"
+      " ab"
+    </Recipe>
+    <Recipe Result="CrossbowBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="rod" b="planks" c="string" Description="Make a crossbow from rods, string and planks">
+      " a"
+      "acb"
+      " a"
+    </Recipe>
+    <Recipe Result="MusketBlock" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="planks" b="ironblock" c="rod" Description="Make a musket from iron and planks">
+      "cba"
+      " ba"
+    </Recipe>
+    <Recipe Result="ArrowBlock:0" ResultCount="4" RequiredHeatLevel="0" b="stick" c="feather" Description="Make wooden-tipped arrow from stick and feathers">
+      "b"
+      "c"
+    </Recipe>
+    <Recipe Result="ArrowBlock:1" ResultCount="4" RequiredHeatLevel="0" a="stonechunk" b="stick" c="feather" Description="Make stone-tipped arrow from stick, feathers and stone">
+      "a"
+      "b"
+      "c"
+    </Recipe>
+    <Recipe Result="ArrowBlock:2" ResultCount="4" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="ironingot" b="stick" c="feather" Description="Make iron-tipped arrow from stick, feathers and iron">
+      "a"
+      "b"
+      "c"
+    </Recipe>
+    <Recipe Result="ArrowBlock:3" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="diamond" b="arrow:2" Description="Make diamond-tipped arrow from iron arrow and a diamond">
+      "a"
+      "b"
+    </Recipe>
+    <Recipe Result="ArrowBlock:4" ResultCount="1" RequiredHeatLevel="0" a="sulphurchunk" b="arrow:0" Description="Make fire arrow from wooden arrow and sulphur">
+      "a"
+      "b"
+    </Recipe>
+    <Recipe Result="ArrowBlock:5" ResultCount="2" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="rod" b="feather" Description="Make iron bolt from rod and feather">
+      "a"
+      "b"
+    </Recipe>
+    <Recipe Result="ArrowBlock:6" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="4" a="diamond" b="arrow:5" Description="Make diamond-tipped bolt from iron bolt and a diamond">
+      "a"
+      "b"
+    </Recipe>
+    <Recipe Result="ArrowBlock:7" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="gunpowder" b="arrow:5" Description="Make explosive bolt from iron bolt and gunpowder">
+      "a"
+      "b"
+    </Recipe>
+    <Recipe Result="ArrowBlock:8" ResultCount="4" RequiredHeatLevel="0" RequiredPlayerLevel="2" a="copperingot" b="stick" c="feather" Description="Make copper-tipped arrow from stick, feathers and copper">
+      "a"
+      "b"
+      "c"
+    </Recipe>
+    <Recipe Result="BulletBlock:0" ResultCount="8" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="rod" Description="Make musket balls from iron rods">
+      "a"
+    </Recipe>
+    <Recipe Result="BulletBlock:1" ResultCount="4" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="bullet:0" Description="Make buckshot from musket balls">
+      "aa"
+      "aa"
+    </Recipe>
+    <Recipe Result="BulletBlock:1" ResultCount="1" RequiredHeatLevel="0" RequiredPlayerLevel="3" a="bullet:2" Description="Make buckshot from buckshot balls">
+      "aa"
+      "aa"

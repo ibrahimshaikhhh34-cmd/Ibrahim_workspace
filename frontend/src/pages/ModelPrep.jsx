@@ -29,6 +29,8 @@ export default function ModelPrep() {
   const [texture, setTexture] = useState(null);
   const [icon, setIcon] = useState(null);
   const [busy, setBusy] = useState(false);
+  const [fmt, setFmt] = useState("dae");
+  const [layout, setLayout] = useState("classic");
 
   const settings = { facing, targetLength: Math.max(parseFloat(targetLength) || 1, 0.001), mode };
 
@@ -59,7 +61,7 @@ export default function ModelPrep() {
     if (!name.trim()) return toast.error("Give the model a name");
     setBusy(true);
     try {
-      const blob = await modelApi.exportZip({ file, name, mode, category, facing, targetLength: settings.targetLength, texture, icon });
+      const blob = await modelApi.exportZip({ file, name, mode, category, facing, targetLength: settings.targetLength, fmt, layout, texture, icon });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = `${name}_sc2.zip`;
@@ -73,7 +75,7 @@ export default function ModelPrep() {
     }
   };
 
-  const fmt = (v) => (v == null ? "–" : v.toFixed(3));
+  const fmt3 = (v) => (v == null ? "–" : v.toFixed(3));
 
   return (
     <section data-testid="model-prep-page" className="space-y-8">
@@ -111,7 +113,7 @@ export default function ModelPrep() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[["Verts", info?.vertices], ["Faces", info?.faces], ["UVs", info ? (info.has_uv ? "yes" : "none") : null], ["Size m", size ? `${fmt(size.x)}×${fmt(size.y)}×${fmt(size.z)}` : null]].map(([l, v]) => (
+            {[["Verts", info?.vertices], ["Faces", info?.faces], ["UVs", info ? (info.has_uv ? "yes" : "none") : null], ["Size m", size ? `${fmt3(size.x)}×${fmt3(size.y)}×${fmt3(size.z)}` : null]].map(([l, v]) => (
               <div key={l} className="panel p-3">
                 <p className="text-[10px] uppercase tracking-widest text-[#6B7280]">{l}</p>
                 <p data-testid={`model-stat-${l.toLowerCase().replace(/\s/g, "-")}`} className="font-mono text-sm text-[#F3F4F6] mt-1 truncate">{v ?? "–"}</p>
@@ -162,6 +164,30 @@ export default function ModelPrep() {
               </div>
             </div>
 
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label className="text-xs uppercase tracking-widest text-[#9CA3AF]">Model format</Label>
+                <Select value={fmt} onValueChange={setFmt}>
+                  <SelectTrigger data-testid="model-format-select" className="h-12 bg-[#0B0F17] border-[#2A364F] font-mono"><SelectValue /></SelectTrigger>
+                  <SelectContent className="bg-[#121824]/95 backdrop-blur-xl border-[#2A364F]">
+                    <SelectItem value="dae" className="font-mono">.dae Collada</SelectItem>
+                    <SelectItem value="glb" className="font-mono">.glb glTF binary</SelectItem>
+                    <SelectItem value="gltf" className="font-mono">.gltf + .bin</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-xs uppercase tracking-widest text-[#9CA3AF]">Folder layout</Label>
+                <Select value={layout} onValueChange={setLayout}>
+                  <SelectTrigger data-testid="model-layout-select" className="h-12 bg-[#0B0F17] border-[#2A364F] font-mono"><SelectValue /></SelectTrigger>
+                  <SelectContent className="bg-[#121824]/95 backdrop-blur-xl border-[#2A364F]">
+                    <SelectItem value="classic" className="font-mono">Classic Content 2.x</SelectItem>
+                    <SelectItem value="api" className="font-mono">API 1.9 mod (Assets/)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label className="text-xs uppercase tracking-widest text-[#9CA3AF]">Texture folder</Label>
               <Select value={category} onValueChange={setCategory}>
@@ -202,8 +228,8 @@ export default function ModelPrep() {
           <Button data-testid="model-export-zip-button" onClick={exportZip} disabled={busy || !file} className="btn-press w-full h-14 text-base font-semibold uppercase tracking-wider bg-[#F59E0B] text-[#0B0F17] hover:bg-[#D97706] disabled:opacity-50">
             <Package className="h-5 w-5 mr-2" /> {busy ? "Building ZIP…" : "Export SC2 ZIP"}
           </Button>
-          <p className="font-mono text-[11px] text-[#6B7280] leading-relaxed">
-            Models/{name || "Name"}.dae · Textures/{category}s/{name || "Name"}.png{mode !== "Weapon" ? ` · Icons/${name || "Name"}.png` : ""}
+          <p data-testid="model-export-preview" className="font-mono text-[11px] text-[#6B7280] leading-relaxed">
+            {layout === "api" ? "Assets/" : ""}Models/{fmt === "gltf" ? `${name || "Name"}/${name || "Name"}.gltf + .bin` : `${name || "Name"}.${fmt}`} · {layout === "api" ? "Assets/" : ""}Textures/{category}s/{name || "Name"}.png{mode !== "Weapon" ? ` · Icons/${name || "Name"}.png` : ""}{layout === "api" ? ` · modinfo.json${category === "Creature" ? ` · Assets/Animations/${name || "Name"}.json` : ""}` : ""}
           </p>
         </div>
       </div>

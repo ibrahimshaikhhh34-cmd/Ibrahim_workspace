@@ -1,10 +1,11 @@
-import { FolderKanban, Box, Terminal, FileCode } from "lucide-react";
+import { FolderKanban, Box, Terminal, FileCode, Database } from "lucide-react";
 
 export const TABS = [
   { id: "tracker", label: "Project Tracker", short: "Tracker", icon: FolderKanban },
   { id: "model-prep", label: "Model Prep", short: "Model", icon: Box },
   { id: "log-reader", label: "Log Reader", short: "Logs", icon: Terminal },
   { id: "template-builder", label: "Template Builder", short: "Template", icon: FileCode },
+  { id: "data-builder", label: "Data Builder", short: "Data", icon: Database },
 ];
 
 export const TabNav = ({ active, onChange, variant }) => {
@@ -34,7 +35,7 @@ export const TabNav = ({ active, onChange, variant }) => {
   }
   return (
     <nav
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[#2A364F] bg-[#0B0F17]/95 backdrop-blur-xl grid grid-cols-4"
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[#2A364F] bg-[#0B0F17]/95 backdrop-blur-xl grid grid-cols-5"
       aria-label="Sections"
     >
       {TABS.map(({ id, short, icon: Icon }) => {

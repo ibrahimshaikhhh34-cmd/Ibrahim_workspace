@@ -9,13 +9,19 @@ export const projectsApi = {
   remove: (id) => axios.delete(`${API}/projects/${id}`),
 };
 
+export const snippetsApi = {
+  list: () => axios.get(`${API}/snippets`).then((r) => r.data),
+  create: (body) => axios.post(`${API}/snippets`, body).then((r) => r.data),
+  remove: (id) => axios.delete(`${API}/snippets/${id}`),
+};
+
 export const modelApi = {
   inspect: (file) => {
     const fd = new FormData();
     fd.append("file", file);
     return axios.post(`${API}/model/inspect`, fd).then((r) => r.data);
   },
-  exportZip: ({ file, name, mode, category, facing, targetLength, texture, icon }) => {
+  exportZip: ({ file, name, mode, category, facing, targetLength, fmt, layout, texture, icon }) => {
     const fd = new FormData();
     fd.append("file", file);
     fd.append("name", name);
@@ -23,6 +29,8 @@ export const modelApi = {
     fd.append("category", category);
     fd.append("facing", facing);
     fd.append("target_length", String(targetLength));
+    fd.append("fmt", fmt);
+    fd.append("layout", layout);
     if (texture) fd.append("texture", texture);
     if (icon) fd.append("icon", icon);
     return axios.post(`${API}/model/export`, fd, { responseType: "blob" }).then((r) => r.data);
